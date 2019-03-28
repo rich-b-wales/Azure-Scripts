@@ -6,12 +6,10 @@ foreach ($Sub in $Subs) {
     $vms = GET-AZURERMVM 
     foreach ($VM in $VMS) {
     $NICNAME = $VM.NetworkProfile.NetworkInterfaces.id -replace '.*/'
-    #$NICNAME
+    write-output $Nicname
     $routetable = Get-AzureRmEffectiveRouteTable -NetworkInterfaceName $nicname -ResourceGroupName  $vm.ResourceGroupName | Select-Object -PROPERTY NAME, ADDRESSPREFIX, STATE, SOURCE, nEXTHOPTYPE
-    #$routetable 
     $routecount=0
     While ($routecount -lt $routetable.count) {
-    #$routecount
     $reportoutput = New-Object psobject
     $reportoutput | Add-member NoteProperty "Subscription Name" $Sub.Name
     $reportoutput | Add-member NoteProperty "Resource Group Name" $vm.ResourceGroupName
