@@ -14,4 +14,4 @@ foreach ($Sub in $Subs) {
         } 
         } 
 $Report
-$report | Export-Csv "vnet Peering by Vnet.csv"
+$report | Export-Csv "c:\temp\vnet-Peering-by-Vnet.csv"
