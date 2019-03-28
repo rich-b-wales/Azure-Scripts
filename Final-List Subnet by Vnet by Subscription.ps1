@@ -18,4 +18,4 @@ foreach ($Sub in $Subs) {
         }
 } 
 $Report
-#$report | Export-Csv "subnet by Subscription.csv"
+#$report | Export-Csv "c:\temp\subnet-by-Subscription.csv"
