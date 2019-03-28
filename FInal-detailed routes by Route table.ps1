@@ -21,4 +21,4 @@ foreach ($Sub in $Subs) {
   
         
 #$report
-$report | Export-Csv -NoTypeInformation "routes in a route table.csv"
+$report | Export-Csv -NoTypeInformation "c:\temp\routes-in-a-routetable.csv"
