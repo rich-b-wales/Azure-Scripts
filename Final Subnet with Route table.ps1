@@ -22,4 +22,4 @@ foreach ($Sub in $Subs) {
         }
 } 
 $Report
-$report | Export-Csv -NoTypeInformation "subnets with Route table.csv"
+$report | Export-Csv -NoTypeInformation "c:\temp\subnets-with-Route-table.csv"
