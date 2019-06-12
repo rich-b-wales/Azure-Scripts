@@ -7,7 +7,8 @@ foreach ($Sub in $Subs) {
    foreach ($vm in $vms) {
     $sizeinfo=Get-AzureRmVMSize -VMName $vm.Name -ResourceGroupName $vm.ResourceGroupName | Where-Object {$_.Name -eq $vm.HardwareProfile.VmSize}
     $privateIP = (Get-AzureRmNetworkInterface | Where-Object {$_.id -eq $vm.NetworkProfile.NetworkInterfaces[0].id}).IpConfigurations[0].PrivateIpAddress
-    $datadisk = ($vm.StorageProfile.datadisks.DiskSizeGB) -join '-' 
+    $datadisk = ($vm.StorageProfile.datadisks.DiskSizeGB) -join '-'
+    $disktypes = ($vm.StorageProfile.DataDisks.manageddisk.storageaccounttype) -join '-' 
     $zones = ($vm.Zones) -join '-' 
 $reportoutput = New-Object psobject
     $reportoutput | Add-member NoteProperty "Subscription" $Sub.Name
@@ -21,12 +22,14 @@ $reportoutput = New-Object psobject
     $reportoutput | Add-Member Noteproperty "Memory (MB)"  $sizeinfo.MemoryInMB
     $reportoutput | Add-Member Noteproperty "Internal IP"  $privateip   
     $reportoutput | Add-Member Noteproperty "OS Disk Size (GB)" $vm.StorageProfile.OsDisk.DiskSizeGB
+    $reportoutput | Add-Member Noteproperty "OS Disk Type" $vm.StorageProfile.OsDisk.manageddisk.StorageAccountType
     $reportoutput | Add-Member Noteproperty "Data Disk Size (GB)" $datadisk 
+    $reportoutput | Add-Member Noteproperty "Disk Type" $disktypes
     $report += $reportoutput
     }
     }
     
   
         
-#$report |Format-table
-$report | Export-Csv -NoTypeInformation "c:\temp\machineoutput.csv"
+$report |Format-table
+$report | Export-Csv -NoTypeInformation "c:\temp\machineoutput12-06-a.csv"
