@@ -20,4 +20,4 @@ $reportoutput = New-Object psobject
   
         
 $report |Format-table
-$report | Export-Csv -NoTypeInformation "c:\temp\permissions.csv"
+$report | Export-Csv -NoTypeInformation "c:\temp\permissions-26-07.csv"
