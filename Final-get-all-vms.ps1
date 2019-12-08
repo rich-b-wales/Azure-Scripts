@@ -32,4 +32,4 @@ $reportoutput = New-Object psobject
   
         
 $report |Format-table
-$report | Export-Csv -NoTypeInformation "c:\temp\machineoutput12-06-a.csv"
+$report | Export-Csv -NoTypeInformation "c:\temp\machineoutput02-12.csv"
