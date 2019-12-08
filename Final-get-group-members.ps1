@@ -18,7 +18,7 @@ $csv.ObjectId | ForEach-Object {
     }
     
     $report |Format-table
-$report | Export-Csv -NoTypeInformation "c:\temp\groupmembers-26-07.csv"
+$report | Export-Csv -NoTypeInformation "c:\temp\groupmembers-04-09.csv"
 
 
 
