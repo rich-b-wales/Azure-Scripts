@@ -1,5 +1,4 @@
-﻿Connect-AzureAD
-$results = @()
+﻿$results = @()
 Get-AzureADApplication -All $true | %{  
                              $app = $_
                              $owner = Get-AzureADApplicationOwner -ObjectId $_.ObjectID -Top 1

@@ -1,16 +1,18 @@
 ﻿# This code displays a list of all the routes that exist in a routing table
 $report = @()
-$subs = Get-AzureRmSubscription 
+$subs = Get-AzSubscription 
+
 foreach ($Sub in $Subs) { 
-   $SelectSub = Select-AzureRmSubscription -SubscriptionName $Sub.Name 
-   $vms=Get-AzurermVM
+   $SelectSub = Select-AzSubscription -SubscriptionName $Sub.Name 
+   $vms=Get-AzVM
    foreach ($vm in $vms) {
-    $sizeinfo=Get-AzureRmVMSize -VMName $vm.Name -ResourceGroupName $vm.ResourceGroupName | Where-Object {$_.Name -eq $vm.HardwareProfile.VmSize}
-    $privateIP = (Get-AzureRmNetworkInterface | Where-Object {$_.id -eq $vm.NetworkProfile.NetworkInterfaces[0].id}).IpConfigurations[0].PrivateIpAddress
+    $sizeinfo=Get-AzVMSize -VMName $vm.Name -ResourceGroupName $vm.ResourceGroupName | Where-Object {$_.Name -eq $vm.HardwareProfile.VmSize}
+    $privateIP = (Get-AzNetworkInterface | Where-Object {$_.id -eq $vm.NetworkProfile.NetworkInterfaces[0].id}).IpConfigurations[0].PrivateIpAddress
     $datadisk = ($vm.StorageProfile.datadisks.DiskSizeGB) -join '-'
     $disktypes = ($vm.StorageProfile.DataDisks.manageddisk.storageaccounttype) -join '-' 
     $zones = ($vm.Zones) -join '-' 
-$reportoutput = New-Object psobject
+
+    $reportoutput = New-Object psobject
     $reportoutput | Add-member NoteProperty "Subscription" $Sub.Name
     $reportoutput | Add-member NoteProperty "Resource Group" $vm.ResourceGroupName
     $reportoutput | Add-member NoteProperty "VMname" $vm.Name
@@ -28,8 +30,9 @@ $reportoutput = New-Object psobject
     $report += $reportoutput
     }
     }
-    
-  
-        
+
 $report |Format-table
-$report | Export-Csv -NoTypeInformation "c:\temp\machineoutput03-02-2020-pm.csv"
+#$report | Export-Csv -NoTypeInformation "c:\temp\machineoutput06-01.csv"
+
+
+
