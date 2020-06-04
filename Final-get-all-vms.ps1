@@ -1,4 +1,4 @@
-﻿# This code displays a list of all the routes that exist in a routing table
+﻿# This code extracts virtual machine information and stores in a csv file located in c:\temp
 $report = @()
 $subs = Get-AzureRmSubscription 
 foreach ($Sub in $Subs) { 
@@ -32,4 +32,4 @@ $reportoutput = New-Object psobject
   
         
 $report |Format-table
-$report | Export-Csv -NoTypeInformation "c:\temp\machineoutput03-02-2020-pm.csv"
+$report | Export-Csv -NoTypeInformation "c:\temp\azure-vm.csv"
